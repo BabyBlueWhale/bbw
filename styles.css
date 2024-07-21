@@ -52,14 +52,15 @@ nav a:hover {
 
 .social-links {
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin-left: 1em;
+    margin-top: 20px;
 }
 
 .social-icon {
     width: 30px;
     height: 30px;
-    margin-left: 0.5em;
+    margin: 0 10px;
 }
 
 main {
