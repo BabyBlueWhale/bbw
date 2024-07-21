@@ -52,7 +52,7 @@ nav a:hover {
 
 .social-links {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center the icons horizontally */
     align-items: center;
     margin-top: 20px;
 }
@@ -60,7 +60,7 @@ nav a:hover {
 .social-icon {
     width: 30px;
     height: 30px;
-    margin: 0 10px;
+    margin: 0 10px; /* Ensure spacing between icons */
 }
 
 main {
