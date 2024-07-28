@@ -1,5 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Audio control
+    const hamburgerMenu = document.getElementById('hamburger-menu');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    hamburgerMenu.addEventListener('click', function() {
+        if (mobileNav.style.display === 'none' || mobileNav.style.display === '') {
+            mobileNav.style.display = 'flex';
+        } else {
+            mobileNav.style.display = 'none';
+        }
+    });
+
     const audio = document.getElementById("background-audio");
     const playBtn = document.getElementById("play-btn");
 
@@ -12,20 +22,4 @@ document.addEventListener("DOMContentLoaded", function() {
             playBtn.textContent = "Play";
         }
     });
-
-    // Mobile navigation toggle
-    const hamburgerMenu = document.getElementById('hamburger-menu');
-    const mobileNav = document.getElementById('mobile-nav');
-
-    hamburgerMenu.addEventListener('click', function() {
-        if (mobileNav.style.display === 'none' || mobileNav.style.display === '') {
-            mobileNav.style.display = 'flex';
-        } else {
-            mobileNav.style.display = 'none';
-        }
-    });
 });
-
-function comingSoon() {
-    alert("Coming soon");
-}
