@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background: url('images/photo_2024-07-19_21-39-46.jpg') no-repeat center center fixed;
+    background: url('images/ocean.webp') no-repeat center center fixed;
     background-size: cover;
     color: #004d40;
 }
@@ -17,12 +17,13 @@ header {
 }
 
 #hamburger-menu {
-    display: none;
+    font-family: 'Roboto Mono', monospace;
     font-size: 30px;
     cursor: pointer;
     position: absolute;
     top: 15px;
-    right: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1001;
 }
 
@@ -32,16 +33,18 @@ header {
     background-color: rgba(0, 77, 64, 0.8);
     position: absolute;
     top: 60px;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 200px;
     display: none;
-    text-align: right;
+    text-align: center;
 }
 
 #mobile-nav a {
     padding: 10px;
     color: white;
     text-decoration: none;
+    font-family: 'Roboto Mono', monospace;
 }
 
 #mobile-nav a:hover {
@@ -61,9 +64,6 @@ header {
 main {
     padding: 2em;
     text-align: center;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 15px;
-    margin: 1em;
 }
 
 .container {
@@ -72,13 +72,13 @@ main {
     padding: 1em;
     background: rgba(255, 255, 255, 0.8);
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     margin-bottom: 2em;
     animation: fadeIn 1s ease-in-out;
 }
 
 .container h2 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Mono', monospace;
     font-size: 2.5em;
     margin-bottom: 1em;
     font-weight: bold;
@@ -87,19 +87,19 @@ main {
 }
 
 .container p, .container li {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.2em;
     margin-bottom: 0.5em;
     color: #004d40;
     line-height: 1.6;
 }
 
-img.inline {
+img.inline, .concept-logo, .mission-logo, .vision-logo, .value-proposition-logo, .brand-narrative-logo, .how-we-make-it-happen-logo {
     width: 300px;
     height: auto;
     border-radius: 15px;
     margin-bottom: 1em;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 footer {
@@ -108,26 +108,6 @@ footer {
     text-align: center;
     padding: 1em 0;
     position: relative;
-}
-
-.audio-controls {
-    text-align: center;
-    margin-top: 1em;
-}
-
-#audio-controls button {
-    background-color: #007c91;
-    color: white;
-    border: none;
-    padding: 1em 2em;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.2em;
-    transition: background-color 0.3s ease;
-}
-
-#audio-controls button:hover {
-    background-color: #005662;
 }
 
 .social-links {
