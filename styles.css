@@ -1,21 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #e0f7fa;
-    color: #004d40;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    background: url('images/photo_2024-07-19_21-39-46.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #004d40;
 }
 
 header {
     position: relative;
     text-align: center;
     color: white;
+    padding: 20px 0;
 }
 
-.hero {
-    width: 100%;
+#hamburger-menu {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 1001;
+}
+
+#mobile-nav {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 77, 64, 0.8);
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+    display: none;
+    text-align: right;
+}
+
+#mobile-nav a {
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+#mobile-nav a:hover {
+    background-color: rgba(0, 51, 46, 0.8);
+}
+
+@media (max-width: 768px) {
+    #hamburger-menu {
+        display: block;
+    }
+
+    #mobile-nav {
+        display: none;
+    }
+}
+
+main {
+    padding: 2em;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    margin: 1em;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1em;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.container h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5em;
+    margin-bottom: 1em;
+    font-weight: bold;
+    color: #007c91;
+    animation: slideInFromLeft 1s ease-in-out;
+}
+
+.container p, .container li {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    color: #004d40;
+    line-height: 1.6;
+}
+
+img.inline {
+    width: 300px;
     height: auto;
-    opacity: 0.8;
+    border-radius: 15px;
+    margin-bottom: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: rgba(0, 77, 64, 0.8);
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+    position: relative;
+}
+
+.audio-controls {
+    text-align: center;
+    margin-top: 1em;
+}
+
+#audio-controls button {
+    background-color: #007c91;
+    color: white;
+    border: none;
+    padding: 1em 2em;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+}
+
+#audio-controls button:hover {
+    background-color: #005662;
 }
 
 .social-links {
@@ -37,6 +149,11 @@ header {
     width: 45px;
     height: 45px;
     margin: 0 10px;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
 }
 
 .larger-social-icon {
@@ -45,110 +162,22 @@ header {
 }
 
 .larger-social-icon-1-2 {
-    width: 54px; /* 1.2 times the original size */
-    height: 54px; /* 1.2 times the original size */
+    width: 54px;
+    height: 54px;
 }
 
-.larger-pump-icon {
-    width: 81px; /* Significantly larger size */
-    height: 81px; /* Significantly larger size */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-main {
-    padding: 2em;
-    text-align: center;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1em;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2em;
-}
-
-.container h2 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 2em;
-    margin-bottom: 1em;
-    font-weight: bold;
-}
-
-.container p, .container li {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1em;
-    margin-bottom: 0.5em;
-}
-
-img.inline {
-    width: 300px;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 1em;
-}
-
-footer {
-    background-color: #004d40;
-    color: white;
-    text-align: center;
-    padding: 1em 0;
-    position: relative;
-}
-
-.audio-controls {
-    text-align: center;
-    margin: 1em;
-}
-
-#audio-controls button {
-    background-color: #007c91;
-    color: white;
-    border: none;
-    padding: 1em 2em;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.2em;
-}
-
-#audio-controls button:hover {
-    background-color: #005662;
-}
-
-/* Mobile navigation styling */
-#mobile-nav {
-    display: none; /* Initially hidden */
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #004d40;
-    color: white;
-}
-
-#mobile-nav a {
-    padding: 1em;
-    text-decoration: none;
-    color: white;
-    text-align: center;
-}
-
-#hamburger-menu {
-    cursor: pointer;
-    padding: 1em;
-    background-color: #004d40;
-    color: white;
-    text-align: center;
-}
-
-@media (min-width: 600px) {
-    #mobile-nav {
-        display: none;
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
     }
-
-    #hamburger-menu {
-        display: none;
+    to {
+        transform: translateX(0);
+        opacity: 1;
     }
 }
