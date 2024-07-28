@@ -9,17 +9,4 @@ document.addEventListener("DOMContentLoaded", function() {
             mobileNav.style.display = 'none';
         }
     });
-
-    const audio = document.getElementById("background-audio");
-    const playBtn = document.getElementById("play-btn");
-
-    playBtn.addEventListener('click', () => {
-        if (audio.paused) {
-            audio.play();
-            playBtn.textContent = "Pause";
-        } else {
-            audio.pause();
-            playBtn.textContent = "Play";
-        }
-    });
 });
