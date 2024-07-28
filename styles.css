@@ -25,13 +25,13 @@ header {
     left: 50%;
     transform: translateX(-50%);
     z-index: 1001;
-    color: blue !important;
+    color: #ffffff !important;  /* Set to bright white */
 }
 
 #mobile-nav {
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 77, 64, 0.8);
+    background-color: #007c91;  /* Match the color of the "Concept" link */
     position: absolute;
     top: 60px;
     left: 50%;
@@ -39,22 +39,25 @@ header {
     width: 200px;
     display: none;
     text-align: center;
+    border-radius: 15px;  /* Add border-radius for a rounded effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Add a subtle shadow */
 }
 
 #mobile-nav a {
     padding: 10px;
-    color: white;
+    color: white;  /* Match the color of the "Concept" link text */
     text-decoration: none;
     font-family: 'Roboto Mono', monospace;
 }
 
 #mobile-nav a:hover {
-    background-color: rgba(0, 51, 46, 0.8);
+    background-color: rgba(0, 51, 46, 0.2);  /* Lighten hover background color */
 }
 
 @media (max-width: 768px) {
     #hamburger-menu {
         display: block;
+        color: #ffffff !important;  /* Ensure color is applied on mobile */
     }
 
     #mobile-nav {
@@ -71,9 +74,9 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 1em;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);  /* Match Concept section color */
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 2em;
     animation: fadeIn 1s ease-in-out;
 }
@@ -83,7 +86,7 @@ main {
     font-size: 2.5em;
     margin-bottom: 1em;
     font-weight: bold;
-    color: #007c91;
+    color: #007c91;  /* Match the color of the "Concept" link */
     animation: slideInFromLeft 1s ease-in-out;
 }
 
@@ -100,15 +103,23 @@ img.inline, .concept-logo, .mission-logo, .vision-logo, .value-proposition-logo,
     height: auto;
     border-radius: 15px;
     margin-bottom: 1em;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 footer {
-    background-color: rgba(0, 77, 64, 0.8);
+    background-color: transparent;  /* Remove background color */
     color: white;
     text-align: center;
     padding: 1em 0;
     position: relative;
+}
+
+footer p {
+    background-color: #007c91;  /* Set background color */
+    margin: 0;
+    padding: 10px;  /* Add some padding for better appearance */
+    border-radius: 5px;  /* Add border-radius for a rounded effect */
+    display: inline-block;  /* Ensure it only covers the content */
 }
 
 .social-links {
