@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "videos/chapter-1.mp4",
         "videos/Chapter-2.mp4",
         "videos/Chapter-3.mp4",
-        "videos/chapter-4.mp4"
-        "videos/chapter-5.mp4"
+        "videos/chapter-4.mp4",
+        "videos/chapter-5.mp4",
         "videos/chapter6.mp4",
         "videos/Chapter-7.mp4",
         "videos/chapter-8.mp4"
