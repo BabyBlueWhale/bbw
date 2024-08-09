@@ -35,9 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "videos/chapter-1.mp4",
         "videos/Chapter-2.mp4",
         "videos/Chapter-3.mp4",
-        "videos/chapter-4.mp4",
-        "videos/Chapter-5.mp4",
-        "videos/chapter6.mp4"
+        "videos/chapter-4.mp4"
     ];
 
     let currentVideoIndex = 0;
