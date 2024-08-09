@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "videos/Chapter-2.mp4",
         "videos/Chapter-3.mp4",
         "videos/chapter-4.mp4",
-        "videos/Chapter-5.mp4" // New video added
+        "videos/Chapter-5.mp4",
+        "videos/chapter6.mp4"
     ];
 
     let currentVideoIndex = 0;
@@ -50,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
             currentVideoElement.src = videos[currentVideoIndex];
             currentVideoElement.load();
             currentVideoElement.style.transform = 'translateX(0)';
-            currentVideoElement.play(); // Ensure autoplay
         }, 500);
     }
 
@@ -62,10 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
     nextButton.addEventListener("click", function () {
         currentVideoIndex = (currentVideoIndex + 1) % videos.length;
         updateVideo();
-    });
-
-    currentVideoElement.addEventListener('ended', function () {
-        nextButton.click(); // Automatically play next video
     });
 
     // EmailJS form submission
