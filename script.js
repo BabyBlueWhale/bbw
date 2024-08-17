@@ -37,9 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "videos/Chapter-3.mp4",
         "videos/chapter-4.mp4",
         "videos/Chapter-5.mp4",
-        "videos/chapter6.mp4",
-        "videos/Chapter-7.mp4",
-        "videos/Chapter-8.mp4"
+        "videos/chapter6.mp4"
     ];
 
     let currentVideoIndex = 0;
@@ -82,3 +80,34 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const readMoreLink = document.getElementById("read-more-link");
+    const moreText = document.getElementById("more-text");
+
+    readMoreLink.addEventListener("click", function(event) {
+        event.preventDefault();
+        moreText.style.display = "inline";
+        readMoreLink.style.display = "none";
+    });
+    
+    // Modal code as previously implemented
+    const modal = document.getElementById("explanation-modal");
+    const link = document.getElementById("explanation-link");
+    const closeBtn = document.getElementsByClassName("close")[0];
+
+    link.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});
+
