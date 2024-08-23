@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const hamburgerMenu = document.getElementById('hamburger-menu');
     const mobileNav = document.getElementById('mobile-nav');
     const backToTopButton = document.getElementById('back-to-top');
+    const mobileNavLinks = mobileNav.querySelectorAll('a'); // Select all links inside the mobile nav
 
     // Toggle mobile navigation
     hamburgerMenu.addEventListener('click', function () {
@@ -9,6 +10,20 @@ document.addEventListener("DOMContentLoaded", function () {
             mobileNav.classList.toggle('open');
         } catch (error) {
             console.error("Error toggling mobile navigation:", error);
+        }
+    });
+
+    // Close the mobile nav when a link is clicked
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function () {
+            mobileNav.classList.remove('open');
+        });
+    });
+
+    // Close the mobile nav when clicking outside the menu
+    document.addEventListener('click', function(event) {
+        if (!mobileNav.contains(event.target) && event.target !== hamburgerMenu) {
+            mobileNav.classList.remove('open');
         }
     });
 
@@ -113,4 +128,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
-

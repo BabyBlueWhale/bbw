@@ -31,6 +31,12 @@
 </head>
 
 <body>
+    <!-- Video Background -->
+    <video autoplay muted loop id="video-background">
+        <source src="web backround/video-background.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
     <header id="sticky-header" role="banner">
         <div class="header-wrapper">
             <div class="promo-container">
@@ -74,54 +80,11 @@
         <a href="#roadmap">Roadmap</a>
         <a href="#how-to-buy">How to Buy</a>
         <a href="#merchandise">Merchandise</a>
-        <a href="#videos">Videos</a>
+        <a href="#videos">Story of Bubbles</a>
         <a href="#game">Game</a>
         <a href="#contact">Contact Us</a>
     </nav>
-  <!-- Notice Board Section -->
-<div class="announcement-board">
-    <div class="announcement-content">
-        <p><strong>🚨 Important Update for Our Token Holders:</strong><br><br>
-        We want to keep you informed about an important development. <a href="#" id="read-more-link" style="color: #ffd700; text-decoration: underline;">Click to read more</a>
-        <span id="more-text" style="display: none;">
-            Recently, one of our token holders created a Raydium pool without consulting us first. As a result, our token is now available on both Pump.fun and Raydium.<br><br>
-            While you can buy or sell tokens on either platform, we highly recommend purchasing directly through our official channel here: <a href="https://pump.fun/39pRgUWgcUjjq5KELjmzRWNZJNtU1xpq3FcGE3Napump" target="_blank" style="color: #ffd700; text-decoration: underline;">Pump.fun</a>. This ensures you’re fully supported and engaged with our community as we continue to grow.<br><br>
-            <a href="#" id="explanation-link" style="color: #ffd700; text-decoration: underline;">Click here to learn how the Raydium pool was created</a>
-        </span>
-        </p>
-    </div>
-</div>
-
-<!-- Modal for Detailed Explanation -->
-<div id="explanation-modal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>How the Raydium Pool Was Created</h2>
-        <p>Here’s how someone could have bought your token $BBW and created a concentrated liquidity pool on Raydium using SOL as the paired token:</p>
-        <p><strong>Step 1: Buying Your Token ($BBW)</strong></p>
-        <p>Purchase on Pump.fun: The user purchased $BBW tokens from your official platform, Pump.fun. This could be done by exchanging a cryptocurrency like SOL for $BBW. After completing the transaction, the $BBW tokens were transferred to the user's Solana wallet.</p>
-        <p><strong>Step 2: Creating a Concentrated Liquidity Pool on Raydium</strong></p>
-        <p>Once the user had $BBW tokens in their wallet, they followed these steps to create a concentrated liquidity pool on Raydium:</p>
-        <p><strong>Accessing Raydium:</strong> The user visited the Raydium platform and connected their Solana wallet, where the $BBW and SOL tokens were stored.</p>
-        <p><strong>Navigating to the Liquidity Pool Section:</strong> The user went to the "Liquidity" section on Raydium and chose the option to create a concentrated liquidity pool.</p>
-        <p><strong>Selecting $BBW and SOL for the Pool:</strong> The user selected $BBW as the first token and paired it with SOL, a commonly used cryptocurrency on the Solana blockchain. This pair ($BBW/SOL) allows traders to swap between $BBW and SOL.</p>
-        <p><strong>Setting the Price Range:</strong> In a concentrated liquidity pool, the user can specify a range within which their liquidity will be active. For example, they might set their liquidity to be active only when $BBW is trading within a certain price range relative to SOL. By concentrating liquidity in a specific range, the user aims to maximize the potential trading fees when $BBW trades within that range.</p>
-        <p><strong>Depositing $BBW and SOL:</strong> The user then deposited their $BBW tokens along with an equivalent value of SOL into the pool. The amount of each token would depend on the current market price at the time of deposit. In return, the user received Liquidity Provider (LP) tokens representing their share of the concentrated liquidity pool.</p>
-        <p><strong>Uncertainty About Earnings:</strong> It’s important to note that you do not have visibility into whether the user is earning fees from this pool. Whether or not they earn depends on several factors:</p>
-        <ul>
-            <li>Trading Volume: If there’s significant trading activity within the price range they set, they could earn fees. However, if there’s little or no trading within that range, their earnings might be minimal or nonexistent.</li>
-            <li>Market Movements: If the price of $BBW moves outside the range they selected, their liquidity may no longer be active, meaning they wouldn’t earn fees until the price returns to their specified range.</li>
-        </ul>
-        <p><strong>Impact on Your Token:</strong> The creation of this concentrated liquidity pool on Raydium means that:</p>
-        <ul>
-            <li>Increased Accessibility: $BBW is now available for trading on Raydium, increasing its accessibility to a broader audience.</li>
-            <li>Potential Arbitrage: With $BBW available on both Pump.fun and Raydium, price differences between the platforms might lead to arbitrage opportunities, where traders buy low on one platform and sell high on another.</li>
-            <li>Fragmented Liquidity: The presence of $BBW on multiple platforms might fragment liquidity, which could affect price stability and trading volumes on your official platform.</li>
-        </ul>
-        <p><strong>Conclusion:</strong> A user bought $BBW and used SOL to create a concentrated liquidity pool on Raydium. While this makes $BBW more accessible for trading, you do not have information about whether this user is earning fees from the pool. The impact on your token includes increased accessibility, potential arbitrage, and possible liquidity fragmentation between Pump.fun and Raydium.</p>
-    </div>
-</div>
-
+  
     <main>
         <!-- Other sections -->
         <section id="concept" class="container">
@@ -177,10 +140,10 @@
                 <li>Merchandise store open ✅</li>
                 <li>King of the hill on pump.fun ✅</li>
                 <li>DexScreener paid ✅</li>
-                <li>Achieve bonding curve on the pump.fun ⏳</li>
-                <li>Raydium Launch ⏳</li>
+                <li>Migrate To Raydium ⏳</li>
+                <li>Moontolk listing⏳</li>
                 <li>Geckoterminal Listing (at the same time as Raydium Launch) ⏳</li>
-                <li>Announcement of the date of rewards app launch for IOS and Android ⏳</li>
+                <li>Rewards app launch for IOS and Android ⏳</li>
                 <li>Follow our Socials for the updates</li>
             </ul>
         </section>
@@ -191,7 +154,7 @@
             <p><strong>2. Create a Wallet:</strong> Download and set up a Solana-compatible wallet such as Phantom or Sollet.</p>
             <p><strong>3. Acquire SOL:</strong> Purchase Solana (SOL) on a major cryptocurrency exchange like Binance, Coinbase, or Kraken.</p>
             <p><strong>4. Transfer SOL to Your Wallet:</strong> Withdraw SOL from the exchange to your Solana wallet address.</p>
-            <p><strong>5. Use a Decentralized Exchange:</strong> Visit a pump.fun->raydium. Connect your wallet.</p>
+            <p><strong>5. Use a Decentralized Exchange:</strong> Visit a pump.fun Connect your wallet.</p>
         </section>
         <section id="merchandise" class="container">
             <h2>Merchandise</h2>
@@ -200,7 +163,7 @@
             <p>Support marine conservation by purchasing our exclusive Baby Blue Whale merchandise. All proceeds go towards our conservation efforts.</p>
         </section>
         <section id="videos" class="container">
-            <h2>Videos</h2>
+            <h2>Story of Bubbles</h2>
             <div class="video-wrapper">
                 <button id="prev-video" class="carousel-button">❮</button>
                 <div class="video-container">
