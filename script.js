@@ -2,15 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const hamburgerMenu = document.getElementById('hamburger-menu');
     const mobileNav = document.getElementById('mobile-nav');
     const backToTopButton = document.getElementById('back-to-top');
-    const mobileNavLinks = mobileNav.querySelectorAll('a'); // Select all links inside the mobile nav
+    const mobileNavLinks = mobileNav.querySelectorAll('a');
 
     // Toggle mobile navigation
     hamburgerMenu.addEventListener('click', function () {
-        try {
-            mobileNav.classList.toggle('open');
-        } catch (error) {
-            console.error("Error toggling mobile navigation:", error);
-        }
+        mobileNav.classList.toggle('open');
     });
 
     // Close the mobile nav when a link is clicked
@@ -38,14 +34,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Smooth scroll to top
     backToTopButton.addEventListener('click', function () {
-        try {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } catch (error) {
-            console.error("Error scrolling to top:", error);
-        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Video carousel functionality
+    // Video carousel functionality for "Story of Bubbles" section
     const videos = [
         "videos/chapter-1.mp4",
         "videos/Chapter-2.mp4",
@@ -64,11 +56,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const prevButton = document.getElementById("prev-video");
     const nextButton = document.getElementById("next-video");
 
+    // Update video source and play
     function updateVideo() {
         currentVideoElement.style.transform = 'translateX(-100%)';
         setTimeout(() => {
             currentVideoElement.src = videos[currentVideoIndex];
             currentVideoElement.load();
+            currentVideoElement.play(); // Ensure the next video plays automatically
             currentVideoElement.style.transform = 'translateX(0)';
         }, 500);
     }
@@ -83,24 +77,32 @@ document.addEventListener("DOMContentLoaded", function () {
         updateVideo();
     });
 
+    // Autoplay and loop through the videos in sequence
+    currentVideoElement.addEventListener('ended', function () {
+        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+        updateVideo();
+    });
+
+    // Ensure the video is muted and can be unmuted by the user
+    currentVideoElement.muted = true;
+    currentVideoElement.autoplay = true;
+    currentVideoElement.playsinline = true;
+    currentVideoElement.loop = false; // We'll handle looping manually for sequence playback
+
     // EmailJS form submission
     const contactForm = document.getElementById('contact-form');
     contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
-
-        // Send form data to EmailJS
         emailjs.sendForm('service_6i07kfc', 'template_dbd3dv8', this)
             .then(function () {
                 alert('Enquiry sent successfully!');
                 contactForm.reset();
             }, function (error) {
-                console.error('Failed to send enquiry:', error);
                 alert('Failed to send enquiry. Please try again.');
             });
     });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
+    // Additional "read more" functionality
     const readMoreLink = document.getElementById("read-more-link");
     const moreText = document.getElementById("more-text");
 
@@ -109,8 +111,8 @@ document.addEventListener("DOMContentLoaded", function () {
         moreText.style.display = "inline";
         readMoreLink.style.display = "none";
     });
-    
-    // Modal code as previously implemented
+
+    // Modal code
     const modal = document.getElementById("explanation-modal");
     const link = document.getElementById("explanation-link");
     const closeBtn = document.getElementsByClassName("close")[0];
