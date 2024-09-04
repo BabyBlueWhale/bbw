@@ -10,20 +10,28 @@ body {
     overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
+/* Header Styling */
 header {
-    position: -webkit-sticky;
     position: sticky;
     top: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(0, 0, 0, 0.05); /* 95% transparent */
-    overflow: hidden;
+    background: rgba(255, 255, 255, 0.116); /* Slightly opaque for visibility */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    padding: 10px 20px; /* Padding for spacing */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
 }
 
+/* Header Styling */
 .header-wrapper {
-    position: relative;
-    overflow: hidden;
+    display: flex;
+    justify-content: center; /* Center all items in the header */
+    align-items: center;
+    padding: 10px 0;
+    background-color: transparent; /* Transparent background */
+    width: 100%;
 }
 
 .header-wrapper::before {
@@ -69,31 +77,37 @@ header {
     background-color: #004d40;
 }
 
+/* Social Icons Styling */
+/* Social Icons and Menu Styling */
 .header-social-links {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    align-items: center;
+    gap: 20px; /* Space between social icons */
+    justify-content: center; /* Center the social icons and hamburger menu */
 }
 
+/* Social Icons Styling */
 .social-icon {
-    width: 30px;
-    height: 30px;
-    transition: transform 0.3s ease;
+    width: 50px; /* Increase icon size */
+    height: 50px;
+    transition: transform 0.3s ease; /* Smooth hover effect */
 }
 
 .social-icon:hover {
-    transform: scale(1.1);
+    transform: scale(1.2); /* Slight zoom on hover for emphasis */
 }
 
+/* Improved Hamburger Menu */
 #hamburger-menu {
     font-family: 'Roboto Mono', monospace;
     font-size: 30px;
     cursor: pointer;
-    color: #ffffff; /* Bright white color */
-    background-color: transparent; /* No background */
+    color: #007c91;
+    background-color: rgba(0, 0, 0, 0.1); /* Light transparent background for better visibility */
+    border-radius: 5px; /* Rounded corners */
     padding: 10px;
-    border-radius: 5px;
-    text-align: center; /* Center the menu icon */
+    margin-left: 20px; /* Space between menu and icons */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
 }
 
 #mobile-nav {
