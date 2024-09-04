@@ -11,18 +11,27 @@ body {
     overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
+/* General Link Styles */
+a {
+    word-wrap: break-word; /* Break long words or URLs */
+    overflow-wrap: break-word; /* Ensure content wraps properly */
+    max-width: 100%; /* Prevent links from exceeding container width */
+    white-space: normal; /* Allow line breaks within the link */
+}
+
 /* Header Styling */
 header {
     position: sticky;
     top: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.116); /* Slightly opaque for visibility */
+    background: rgba(255, 255, 255, 0.336); /* Slightly opaque for visibility */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
     padding: 10px 20px; /* Padding for spacing */
     display: flex;
     align-items: center; /* Center content vertically */
     justify-content: center; /* Center content horizontally */
+    overflow: hidden; /* Prevent horizontal overflow */
 }
 
 /* Header Styling */
@@ -106,7 +115,7 @@ header {
     font-size: 30px;
     cursor: pointer;
     color: #007c91;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.384);
     border-radius: 5px;
     padding: 10px;
     margin-left: 20px;
@@ -119,19 +128,22 @@ header {
     background-color: #007c91;
     position: fixed;
     top: 50px; /* Adjust to align with header */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
+    left: 0; /* Align it to the left */
+    width: 220px; /* Adjust width */
     text-align: center;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1001;
-    transition: all 0.3s ease-in-out;
+    transition: max-height 0.3s ease-in-out;
+    max-height: 0; /* Collapsed by default */
+    overflow: hidden; /* Hide overflowing content */
 }
 
 #mobile-nav.open {
     display: flex;
+    max-height: 300px; /* Expanded height */
 }
+
 
 #mobile-nav a {
     padding: 10px;
