@@ -4,6 +4,7 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box; /* Ensures padding does not affect the total width/height of elements */
     background: url('images/ocean.webp') no-repeat center center fixed;
     background-size: cover;
     color: #004d40;
@@ -30,8 +31,9 @@ header {
     justify-content: center; /* Center all items in the header */
     align-items: center;
     padding: 10px 0;
-    background-color: transparent; /* Transparent background */
+    background-color: transparent;
     width: 100%;
+    overflow: hidden; /* Prevent any overflow that could cause horizontal scrolling */
 }
 
 .header-wrapper::before {
@@ -77,13 +79,14 @@ header {
     background-color: #004d40;
 }
 
-/* Social Icons Styling */
 /* Social Icons and Menu Styling */
 .header-social-links {
     display: flex;
     align-items: center;
     gap: 20px; /* Space between social icons */
-    justify-content: center; /* Center the social icons and hamburger menu */
+    justify-content: center;
+    flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+    max-width: 100%; /* Ensure the social links container does not exceed the width of the screen */
 }
 
 /* Social Icons Styling */
@@ -103,11 +106,11 @@ header {
     font-size: 30px;
     cursor: pointer;
     color: #007c91;
-    background-color: rgba(0, 0, 0, 0.1); /* Light transparent background for better visibility */
-    border-radius: 5px; /* Rounded corners */
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
     padding: 10px;
-    margin-left: 20px; /* Space between menu and icons */
-    transition: background-color 0.3s ease; /* Smooth transition for hover */
+    margin-left: 20px;
+    transition: background-color 0.3s ease;
 }
 
 #mobile-nav {
@@ -347,7 +350,27 @@ footer p {
     right: 10px;
 }
 
+/* Media Query for Mobile Devices */
 @media (max-width: 600px) {
+    .header-wrapper {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+    
+    .header-social-links {
+        justify-content: center; /* Center the social icons and menu */
+        margin: 0 auto; /* Center container within the available space */
+    }
+
+    .social-icon {
+        width: 40px; /* Adjust icon size for mobile */
+        height: 40px;
+    }
+
+    #hamburger-menu {
+        margin-left: 10px; /* Less margin for smaller screens */
+    }
+
+    /* Your Existing Media Query Adjustments */
     .video-container {
         height: auto; /* Adjust height for mobile */
     }
