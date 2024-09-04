@@ -4,19 +4,19 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Ensures padding does not affect the total width/height of elements */
+    box-sizing: border-box;
     background: url('images/ocean.webp') no-repeat center center fixed;
     background-size: cover;
     color: #004d40;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: hidden;
 }
 
 /* General Link Styles */
 a {
-    word-wrap: break-word; /* Break long words or URLs */
-    overflow-wrap: break-word; /* Ensure content wraps properly */
-    max-width: 100%; /* Prevent links from exceeding container width */
-    white-space: normal; /* Allow line breaks within the link */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    white-space: normal;
 }
 
 /* Header Styling */
@@ -25,42 +25,22 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(0, 0, 0, 0.3); /* Transparent background to blend with the main background */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
     display: flex;
-    align-items: center; /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
-    overflow: hidden; /* Prevent horizontal overflow */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 /* Header Wrapper Styling */
 .header-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-    width: 100%;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the left */
+    padding: 10px 20px;
     position: relative;
-}
-
-.header-wrapper::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: 100%;
-    background: inherit; /* Inherit the background of the header */
-    z-index: -1;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    transform: scale(1.2); /* Slightly scaled up for the magnifying effect */
-}
-
-.header-wrapper:hover::before {
-    transform: scale(1);
-    opacity: 0.5; /* Optional: Adjust opacity for a better visual effect */
 }
 
 .promo-container {
@@ -79,7 +59,7 @@ header {
     text-align: center;
     text-decoration: none;
     border-radius: 5px;
-    margin: 0 10px; /* Add margin to space out the buttons */
+    margin: 0 10px;
     animation: pulse 1.5s infinite;
 }
 
@@ -87,73 +67,95 @@ header {
     background-color: #004d40;
 }
 
-/* Social Icons and Menu Styling */
+/* Social Media Icons - Vertically Aligned */
 .header-social-links {
     display: flex;
-    align-items: center;
-    gap: 15px; /* Reduced gap for tighter spacing */
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column; /* Align icons vertically */
+    align-items: flex-start; /* Align to the left under hamburger menu */
+    gap: 10px; /* Space between icons */
 }
 
-/* Improved Social Icons Styling */
 .social-icon {
-    width: 40px; /* Adjusted size for consistency */
+    width: 40px;
     height: 40px;
-    filter: grayscale(100%); /* Make icons grayscale initially */
-    transition: filter 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+    transition: transform 0.3s ease;
 }
 
 .social-icon:hover {
-    filter: grayscale(0%); /* Colorize on hover */
-    transform: scale(1.1); /* Slight zoom on hover for emphasis */
+    transform: scale(1.1); /* Slight zoom on hover */
 }
 
+/* Hamburger Menu on the Left */
 /* Hamburger Menu Styling */
 #hamburger-menu {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 30px;
+    position: relative;
+    width: 30px;
+    height: 15px; /* Adjust height for two dashes */
     cursor: pointer;
-    color: #ffffff; /* White color for better visibility */
-    background-color: transparent; /* No background */
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1002;
+    margin-bottom: 15px; /* Space between hamburger and social icons */
 }
 
-/* Mobile Navigation Menu */
+#hamburger-menu div {
+    width: 100%;
+    height: 3px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+/* Full-Screen Overlay Menu */
 #mobile-nav {
     display: none;
     flex-direction: column;
-    background-color: #333; /* Dark background to match header */
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
     position: fixed;
-    top: 50px;
+    top: 0;
     left: 0;
-    width: 220px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 100%;
     z-index: 1001;
-    transition: max-height 0.3s ease-in-out;
-    max-height: 0; /* Collapsed by default */
-    overflow: hidden; /* Hide overflowing content */
+    transition: opacity 0.3s ease;
+    opacity: 0;
 }
 
 #mobile-nav.open {
     display: flex;
-    max-height: 300px; /* Expanded height */
+    opacity: 1;
 }
 
 #mobile-nav a {
-    padding: 10px;
-    color: white;
+    color: #ffffff;
+    font-size: 1.5em;
     text-decoration: none;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1em;
+    margin: 20px 0;
+    font-family: 'Poppins', sans-serif;
+    transition: color 0.3s ease;
 }
 
 #mobile-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
+    color: #cccccc;
+}
+
+/* Close Button (X) Effect */
+#hamburger-menu.open div:nth-child(1) {
+    transform: rotate(45deg);
+    position: absolute;
+    top: 9px;
+}
+
+#hamburger-menu.open div:nth-child(2) {
+    opacity: 0;
+}
+
+#hamburger-menu.open div:nth-child(3) {
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 9px;
 }
 
 main {
@@ -200,7 +202,7 @@ main {
     text-decoration: none;
     animation: pulse 1.5s infinite;
     margin-top: 1em;
-    margin-bottom: 1em; /* Added margin-bottom to space it from the text below */
+    margin-bottom: 1em;
 }
 
 .merch-link:hover {
@@ -255,11 +257,11 @@ footer p {
     background-color: #004d40;
 }
 
+/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
     }
@@ -270,7 +272,6 @@ footer p {
         transform: translate3d(-100%, 0, 0);
         opacity: 0;
     }
-
     to {
         transform: translate3d(0, 0, 0);
         opacity: 1;
@@ -281,11 +282,9 @@ footer p {
     0% {
         transform: scale(1);
     }
-
     50% {
         transform: scale(1.05);
     }
-
     100% {
         transform: scale(1);
     }
@@ -295,6 +294,7 @@ footer p {
     animation: pulse 1.5s infinite;
 }
 
+/* Video Section and Modal Styles */
 .game-section {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 15px;
@@ -327,13 +327,13 @@ footer p {
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow: hidden; /* Add overflow hidden */
-    width: 100%; /* Add this for responsive width */
+    overflow: hidden;
+    width: 100%;
 }
 
 .video-container {
-    width: 100%; /* Full width on mobile */
-    max-width: 560px; /* Max width for larger screens */
+    width: 100%;
+    max-width: 560px;
     transition: transform 0.5s ease-in-out;
 }
 
@@ -361,38 +361,30 @@ footer p {
     right: 10px;
 }
 
-/* Media Query for Mobile Devices */
-@media (max-width: 600px) {
+/* Styling for mobile devices */
+@media (max-width: 768px) {
     .header-wrapper {
-        padding: 10px; /* Adjust padding for smaller screens */
-    }
-    
-    .header-social-links {
-        justify-content: center; /* Center the social icons and menu */
-        margin: 0 auto; /* Center container within the available space */
-    }
-
-    .social-icon {
-        width: 40px; /* Adjust icon size for mobile */
-        height: 40px;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center;
+        padding: 10px;
     }
 
     #hamburger-menu {
-        margin-left: 10px; /* Less margin for smaller screens */
+        margin-bottom: 10px; /* Space below the hamburger menu */
     }
 
-    /* Adjustments for mobile */
+    .header-social-links {
+        margin-top: 10px; /* Space above social icons */
+        justify-content: center;
+    }
+
+
     .video-container {
-        height: auto; /* Adjust height for mobile */
-    }
-
-    .video-container video {
-        width: 100%; /* Full width on mobile */
-        height: auto; /* Adjust height for mobile */
+        height: auto;
     }
 
     .carousel-button {
-        font-size: 1.5em; /* Smaller button size on mobile */
+        font-size: 1.5em;
     }
 }
 
@@ -400,13 +392,13 @@ footer p {
 #contact-form {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the items */
+    align-items: center;
 }
 
 #contact-form label, #contact-form input, #contact-form textarea, #contact-form button {
     margin-bottom: 10px;
-    width: 100%; /* Full width for the items */
-    max-width: 500px; /* Max width to constrain the size */
+    width: 100%;
+    max-width: 500px;
 }
 
 #contact-form input, #contact-form textarea {
@@ -419,7 +411,7 @@ footer p {
 #contact-form button {
     padding: 10px;
     font-size: 16px;
-    background-color: #007c91; /* Adjusted color */
+    background-color: #007c91;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -427,11 +419,12 @@ footer p {
 }
 
 #contact-form button:hover {
-    background-color: #0056b3; /* Adjusted hover color */
+    background-color: #0056b3;
 }
 
+/* Announcement Board */
 .announcement-board {
-    background-color: #1e90ff; /* Vibrant Blue Background */
+    background-color: #1e90ff;
     color: white;
     padding: 15px 20px;
     text-align: center;
@@ -450,22 +443,22 @@ footer p {
     animation: fadeIn 2s ease-in-out, pulse 1.5s infinite alternate;
 }
 
-/* Modal Styling */
+/* Modal styling */
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1001; 
+    display: none;
+    position: fixed;
+    z-index: 1001;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; 
-    background-color: rgba(0, 0, 0, 0.4); 
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; 
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
@@ -474,10 +467,10 @@ footer p {
 }
 
 .close {
-    height: 30px; /* Adjusted to match the height of the social icons */
-    width: 30px;  /* Adjusted width similarly */
-    font-size: 24px; /* Adjust font size for a balanced look */
-    line-height: 30px; /* Align vertically */
+    height: 30px;
+    width: 30px;
+    font-size: 24px;
+    line-height: 30px;
     color: #aaa;
     float: right;
     font-weight: bold;
@@ -497,9 +490,9 @@ footer p {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the video covers the entire background */
-    z-index: -1; /* Places the video behind other content */
-    pointer-events: none; /* Prevents the video from interfering with user interactions */
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
 }
 
 /* Responsive Iframe Container for Games */
@@ -507,10 +500,10 @@ footer p {
     position: relative;
     width: 100%;
     height: 0;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    padding-bottom: 56.25%;
     overflow: hidden;
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for a floating effect */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 1em;
 }
 
