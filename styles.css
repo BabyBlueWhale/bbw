@@ -25,24 +25,23 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.336); /* Slightly opaque for visibility */
+    background: rgba(0, 0, 0, 0.3); /* Transparent background to blend with the main background */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
-    padding: 10px 20px; /* Padding for spacing */
+    padding: 10px 20px;
     display: flex;
     align-items: center; /* Center content vertically */
     justify-content: center; /* Center content horizontally */
     overflow: hidden; /* Prevent horizontal overflow */
 }
 
-/* Header Styling */
+/* Header Wrapper Styling */
 .header-wrapper {
     display: flex;
-    justify-content: center; /* Center all items in the header */
+    justify-content: center;
     align-items: center;
     padding: 10px 0;
-    background-color: transparent;
     width: 100%;
-    overflow: hidden; /* Prevent any overflow that could cause horizontal scrolling */
+    position: relative;
 }
 
 .header-wrapper::before {
@@ -92,44 +91,45 @@ header {
 .header-social-links {
     display: flex;
     align-items: center;
-    gap: 20px; /* Space between social icons */
+    gap: 15px; /* Reduced gap for tighter spacing */
     justify-content: center;
-    flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
-    max-width: 100%; /* Ensure the social links container does not exceed the width of the screen */
+    flex-wrap: wrap;
 }
 
-/* Social Icons Styling */
+/* Improved Social Icons Styling */
 .social-icon {
-    width: 50px; /* Increase icon size */
-    height: 50px;
-    transition: transform 0.3s ease; /* Smooth hover effect */
+    width: 40px; /* Adjusted size for consistency */
+    height: 40px;
+    filter: grayscale(100%); /* Make icons grayscale initially */
+    transition: filter 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
 }
 
 .social-icon:hover {
-    transform: scale(1.2); /* Slight zoom on hover for emphasis */
+    filter: grayscale(0%); /* Colorize on hover */
+    transform: scale(1.1); /* Slight zoom on hover for emphasis */
 }
 
-/* Improved Hamburger Menu */
+/* Hamburger Menu Styling */
 #hamburger-menu {
     font-family: 'Roboto Mono', monospace;
     font-size: 30px;
     cursor: pointer;
-    color: #007c91;
-    background-color: rgba(255, 255, 255, 0.384);
-    border-radius: 5px;
+    color: #ffffff; /* White color for better visibility */
+    background-color: transparent; /* No background */
     padding: 10px;
-    margin-left: 20px;
-    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    text-align: center;
 }
 
+/* Mobile Navigation Menu */
 #mobile-nav {
     display: none;
     flex-direction: column;
-    background-color: #007c91;
+    background-color: #333; /* Dark background to match header */
     position: fixed;
-    top: 50px; /* Adjust to align with header */
-    left: 0; /* Align it to the left */
-    width: 220px; /* Adjust width */
+    top: 50px;
+    left: 0;
+    width: 220px;
     text-align: center;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -144,7 +144,6 @@ header {
     max-height: 300px; /* Expanded height */
 }
 
-
 #mobile-nav a {
     padding: 10px;
     color: white;
@@ -154,7 +153,7 @@ header {
 }
 
 #mobile-nav a:hover {
-    background-color: rgba(0, 51, 46, 0.2);
+    background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
 }
 
 main {
@@ -193,7 +192,7 @@ main {
 
 .merch-link {
     display: block;
-    color: #007c91; /* Same color as background */
+    color: #007c91;
     padding: 10px;
     font-size: 1.2em;
     font-weight: bold;
@@ -205,7 +204,7 @@ main {
 }
 
 .merch-link:hover {
-    color: #004d40; /* Darker shade on hover */
+    color: #004d40;
 }
 
 img.inline, .concept-logo, .mission-logo, .vision-logo, .value-proposition-logo, .brand-narrative-logo, .how-we-make-it-happen-logo {
@@ -382,7 +381,7 @@ footer p {
         margin-left: 10px; /* Less margin for smaller screens */
     }
 
-    /* Your Existing Media Query Adjustments */
+    /* Adjustments for mobile */
     .video-container {
         height: auto; /* Adjust height for mobile */
     }
@@ -397,7 +396,7 @@ footer p {
     }
 }
 
-/* Contact form styling */
+/* Contact Form Styling */
 #contact-form {
     display: flex;
     flex-direction: column;
@@ -451,17 +450,7 @@ footer p {
     animation: fadeIn 2s ease-in-out, pulse 1.5s infinite alternate;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.05); }
-}
-
-/* Modal styling */
+/* Modal Styling */
 .modal {
     display: none; 
     position: fixed; 
@@ -471,8 +460,7 @@ footer p {
     width: 100%;
     height: 100%;
     overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    background-color: rgba(0, 0, 0, 0.4); 
 }
 
 .modal-content {
@@ -514,7 +502,7 @@ footer p {
     pointer-events: none; /* Prevents the video from interfering with user interactions */
 }
 
-/* Responsive iframe container for games */
+/* Responsive Iframe Container for Games */
 .iframe-container {
     position: relative;
     width: 100%;
