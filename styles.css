@@ -26,26 +26,25 @@ header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Header Title Styling */
-.header-title {
-    color: white; /* Ensures the title is visible */
-    font-size: 1.5em;
-    font-weight: bold;
-    text-align: center;
-    margin: 0;
-}
-
 /* Logo Styling */
 .header-logo {
-    width: 60px; /* Increase the width */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 100%; /* Ensure the image is responsive */
-    margin-right: 40px; /* Add margin to space it from the edge */
-    transition: transform 0.3s ease; /* Add smooth transition for scaling */
+    width: 60px; /* Adjusted width */
+    height: auto;
+    max-width: 100%;
+    margin-right: 20px;
+    transition: transform 0.3s ease;
 }
 
 .header-logo:hover {
-    transform: scale(1.1); /* Slight zoom on hover */
+    transform: scale(1.1);
+}
+
+/* Centered Text in Header */
+.header-title {
+    flex-grow: 1; /* Takes up the remaining space */
+    text-align: center;
+    font-size: 1.5em;
+    color: white;
 }
 
 /* Sidebar Styling */
