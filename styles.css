@@ -3,6 +3,7 @@
 /* General Styling */
 body {
     font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -18,12 +19,55 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(0, 0, 0, 0); /* Slightly darker background for the header */
+    background: rgba(255, 255, 255, 0.5); /* Matches container background */
+    border-radius: 15px; /* Matches container's rounded corners */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 5px; /* Reduced padding to make the header smaller */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1em; /* Matches container padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+    font-family: 'Poppins', sans-serif; /* Consistent font */
+    color: #004d40; /* Matches container text color */
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.5); /* Matches container background */
+    padding: 0; /* Remove any padding that was there */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+    border-radius: 15px; /* Matches container */
+    font-family: 'Poppins', sans-serif; /* Consistent font */
+}
+
+/* Flex containers for spacing */
+.header-spacer {
+    flex: 1;
+}
+
+.header-title-container {
+    flex: 2;
+    text-align: center;
+}
+
+.header-logo-container {
+    flex: 1;
+    text-align: right;
+}
+
+/* Header Logo */
+.header-logo {
+    width: 50px; /* Adjust size as needed */
+    transition: transform 0.3s ease;
+}
+
+.header-logo:hover {
+    transform: scale(1.1);
 }
 
 /* Logo Styling */
@@ -39,13 +83,17 @@ header {
     transform: scale(1.1);
 }
 
-/* Centered Text in Header */
+/* Header Text Styling */
 .header-title {
     flex-grow: 1;
     text-align: center;
-    font-size: 1.2em; /* Adjusted font size for a smaller header */
-    color: white;
+    font-size: 1.2em; /* Adjust font size as needed */
+    font-weight: bold; /* Make the text bold */
+    color: #007c91; /* Teal color */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    letter-spacing: 0.5px; /* Slight spacing between letters */
 }
+
 
 /* Sidebar Styling */
 #sidebar {
@@ -80,7 +128,7 @@ header {
 #hamburger-menu div {
     width: 100%;
     height: 2px; /* Thinner lines */
-    background-color: #ffffff;
+    background-color: #007c91;
     transition: all 0.3s ease;
 }
 
@@ -145,7 +193,7 @@ header {
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    margin-top: 45px;
+    margin-top: 55px;
 }
 
 /* Social Icon Styling */
@@ -158,6 +206,142 @@ header {
 .social-icon:hover {
     transform: scale(1.1);
 }
+
+/* 4ocean Collaboration Container Styling */
+#collaboration-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5); /* Light background for contrast */
+    padding: 2em 1em;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+/* Collaboration Container Styling */
+.collab-container {
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    width: 90%;
+}
+
+/* Logos Section Styling */
+.collab-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+.collab-logos .logo {
+    width: 80px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.collab-logos .logo:hover {
+    transform: scale(1.1);
+}
+
+/* Collaboration Heading Styling */
+.collab-heading {
+    font-size: 1.8em;
+    color: #007c91; /* Matches the header color */
+    margin-bottom: 20px;
+}
+
+/* Images Section Styling */
+.collab-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.collab-image {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.collab-image:hover {
+    transform: scale(1.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Logos Section */
+.logos-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5em; /* Spacing between logos */
+    margin-bottom: 1em;
+}
+
+/* Logos Styling */
+.logo {
+    width: 100px; /* Adjust width as needed */
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.1); /* Slight enlarge effect on hover */
+}
+
+/* Collaboration Title */
+.collaboration-title {
+    font-size: 1.8em; /* Adjust font size as needed */
+    color: #007c91; /* Teal color */
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+/* Collaboration Description */
+.collaboration-description {
+    font-size: 1.1em; /* Adjust font size as needed */
+    color: #004d40; /* Darker text color */
+    line-height: 1.6;
+    max-width: 800px; /* Constrain width for readability */
+}
+
+.partner-logo {
+    width: 150px;
+    height: auto;
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+    animation: pulse 1.5s infinite;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #007c91;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 1em;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.1);
+    background-color: #004d40;
+}
+
 
 /* Main Content Styling */
 main {
@@ -175,6 +359,7 @@ a {
     overflow-wrap: break-word; /* Ensures content wraps properly */
     max-width: 100%; /* Prevents links from exceeding the container width */
     white-space: normal; /* Allows line breaks within the link */
+    display: block; /* Makes the link take full width of its container */
 }
 
 /* Container Styling for Centered Content */
@@ -184,17 +369,14 @@ a {
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically */
     width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1200px; /* Limits the maximum width */
+    margin: 0 auto 1.5em auto; /* Centers horizontally and adds bottom margin */
     padding: 1em;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1.5em;
-    animation: fadeIn 1s ease-in-out;
-    width: 90%; /* Width suitable for your design */
-    max-width: 100%; /* Ensures the container does not exceed the screen width */
-    overflow: hidden; /* Prevents overflow */
+    background: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+    overflow: hidden; /* Prevents overflow of content */
 }
 
 /* Contact Form Styling */
@@ -239,6 +421,21 @@ footer {
 
 /* Ensure Proper Media Query Handling for Small Devices */
 @media (max-width: 600px) {
+    a {
+        font-size: 0.9em; /* Adjust font size for smaller screens */
+        word-break: break-all; /* Forces a line break within the words */
+        max-width: 90%; /* Makes sure the link does not exceed the screen width */
+        text-align: center; /* Centers the link text */
+    }
+
+    .collab-image {
+        width: 100px; /* Smaller images for mobile */
+    }
+
+    .collab-heading {
+        font-size: 1.5em; /* Adjusted font size for mobile */
+    }
+
     header {
         flex-direction: row;
         justify-content: space-between;
