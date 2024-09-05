@@ -31,19 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Show/hide back-to-top button
-    const backToTopButton = document.getElementById('back-to-top');
-    window.addEventListener('scroll', function () {
-        if (window.pageYOffset > 300) {
-            backToTopButton.style.display = 'block';
-        } else {
-            backToTopButton.style.display = 'none';
-        }
-    });
-
     // Smooth scroll to top
     backToTopButton.addEventListener('click', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Function to scroll to the top of the page
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  
     });
 
     // Video carousel functionality for "Story of Bubbles" section
