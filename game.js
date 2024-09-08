@@ -32,7 +32,7 @@ const images = {
     speedBoost: new Image()
 };
 
-images.background.src = 'blue%20ocean.webp';
+images.background.src = 'blue%20ocean.jpg';
 images.octopus.src = 'octupus2.png';
 images.fish.src = 'fish.png';
 images.trash.src = 'trash.png';
