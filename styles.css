@@ -291,13 +291,21 @@ header {
 }
 
 /* Media Query for Smaller Screens */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .collab-container {
         flex-direction: row; /* Keeps images in a row */
         flex-wrap: wrap; /* Allows wrapping */
         justify-content: center;
         align-items: center;
         gap: 10px; /* Reduces gap between images for smaller screens */
+    }
+
+    .collab-container .logo { /* Replace '.logo' with your logo class or ID */
+        max-width: 100%; /* Ensures the logo does not exceed container width */
+        height: auto; /* Maintains aspect ratio */
+        margin: 0 auto; /* Centers the logo */
+        padding: 0 10px; /* Adds padding to keep the logo within the container */
+        box-sizing: border-box; /* Ensures padding and borders are included in the width */
     }
 
     .collab-item {
