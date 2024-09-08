@@ -441,7 +441,7 @@ header {
     display: flex;
     align-items: center; /* Center align logos vertically */
     justify-content: center; /* Center align horizontally */
-    gap: 10px; /* Space between logos */
+    gap: 5px; /* Space between logos */
     margin-top: -20px; /* Negative margin to move logos higher */
     margin-bottom: 10px; /* Adjust space below the logos if needed */
     padding: 0; /* Remove any default padding */
