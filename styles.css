@@ -181,8 +181,11 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
-    margin-top: 55px;
+    gap: 15px; /* Space between icons */
+    margin-top: 60px; /* Increased margin to lower the icons */
+    margin-bottom: 20px; /* Space above the main content */
+    position: relative; /* Maintains their relative position */
+    z-index: 1; /* Ensures they stay above other content */
 }
 
 /* Social Icon Styling */
@@ -323,6 +326,17 @@ header {
         font-size: 1.5em; /* Adjusted font size for mobile */
     }
 
+    #combined-container {
+        display: flex;
+        flex-direction: column; /* Stack sections vertically */
+        align-items: center; /* Center align content */
+    }
+
+    #combined-container > * { /* Target all direct children */
+        width: 100%; /* Full width for each section */
+        margin-bottom: 20px; /* Add space between sections */
+    }
+
     /* Existing styles below remain the same */
     header {
         flex-direction: row;
@@ -406,7 +420,6 @@ header {
     }
 }
 
-
 /* Collaboration Heading Styling */
 .collab-heading {
     font-size: 1.5em;
@@ -463,6 +476,8 @@ main {
     flex-direction: column;
     align-items: center; /* Center horizontally */
     justify-content: flex-start; /* Start content from the top */
+    margin-left: 35px; /* Creates space between the sidebar (social icons) and main content */
+    padding-left: 10px; /* Adjust as needed to ensure content isn't too close to the sidebar */
 }
 
 a {
