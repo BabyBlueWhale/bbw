@@ -291,7 +291,7 @@ header {
 }
 
 /* Media Query for Smaller Screens */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .collab-container {
         flex-direction: row; /* Keeps images in a row */
         flex-wrap: wrap; /* Allows wrapping */
