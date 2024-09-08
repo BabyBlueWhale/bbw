@@ -299,13 +299,23 @@ header {
         align-items: center;
         gap: 10px; /* Reduces gap between images for smaller screens */
     }
+    .logos-section {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 0; /* Remove extra padding */
+        overflow: hidden; /* Prevent any overflow */
+        gap: 5px; /* Adjust gap as needed */
+        box-sizing: border-box; /* Include padding and border in width calculations */
+    }
 
-    .collab-container .logo { /* Replace '.logo' with your logo class or ID */
-        max-width: 100%; /* Ensures the logo does not exceed container width */
-        height: auto; /* Maintains aspect ratio */
-        margin: 0 auto; /* Centers the logo */
-        padding: 0 10px; /* Adds padding to keep the logo within the container */
-        box-sizing: border-box; /* Ensures padding and borders are included in the width */
+    .logo {
+        max-width: calc(50% - 10px); /* Ensure logos fit within container */
+        height: auto;
+        margin: 0;
+        display: block;
     }
 
     .collab-item {
@@ -441,14 +451,24 @@ header {
     display: flex;
     align-items: center; /* Center align logos vertically */
     justify-content: center; /* Center align horizontally */
-    gap: 5px; /* Space between logos */
-    margin-top: -20px; /* Negative margin to move logos higher */
-    margin-bottom: 10px; /* Adjust space below the logos if needed */
-    padding: 0; /* Remove any default padding */
+    gap: 10px; /* Space between logos */
+    width: 100%; /* Ensure section takes full width */
+    overflow: hidden; /* Prevent overflow */
+    padding: 0; /* Remove extra padding */
+    box-sizing: border-box; /* Include padding and border in width calculations */
 }
 
+.logo {
+    max-width: 45%; /* Adjust to fit within container */
+    height: auto;
+    display: block; /* Ensure block-level spacing */
+    margin: 0 auto; /* Center the logos */
+    transition: transform 0.3s ease;
+}
+
+/* Optional hover effect for logos */
 .logo:hover {
-    transform: scale(1.1); /* Slight enlarge effect on hover */
+    transform: scale(1.05); /* Slight enlarge effect on hover */
 }
 
 /* Collaboration Title */
@@ -862,27 +882,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 20px; /* Adds a 20px gap above the banner image */
     max-width: 100%; /* Makes the image responsive */
     height: auto; /* Maintains the aspect ratio */
-}
-.logos-section {
-    display: flex;
-    align-items: center; /* Center align vertically */
-    justify-content: center; /* Center align horizontally */
-    gap: 60px; /* Reduce the gap between logos */
-    margin-bottom: 0px; /* Adjust space below the section */
-    padding: 0; /* Remove any default padding */
-}
-
-.logo {
-    max-width: 150px; /* Adjust the max width as needed */
-    height: auto;
-    margin: 0; /* Remove any default margin */
-    display: block; /* Ensure logos are block-level for spacing */
-    transition: transform 0.3s ease;
-}
-
-/* Optional hover effect for logos */
-.logo:hover {
-    transform: scale(1.05); /* Slight enlarge effect on hover */
 }
 
 .dynamic-content {
