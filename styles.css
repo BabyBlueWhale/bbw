@@ -307,7 +307,7 @@ header {
         width: 100%;
         padding: 0; /* Remove extra padding */
         overflow: hidden; /* Prevent any overflow */
-        gap: 5px; /* Adjust gap as needed */
+        gap: 20px; /* Adjust gap as needed */
         box-sizing: border-box; /* Include padding and border in width calculations */
     }
 
@@ -316,6 +316,7 @@ header {
         height: auto;
         margin: 0;
         display: block;
+        gap: 10px;
     }
 
     .collab-item {
@@ -446,24 +447,55 @@ header {
     margin-top: 0;
 }
 
-/* Logos Section Styling */
+/* Adjusting the logos-section to display logos side by side on all screens */
 .logos-section {
     display: flex;
-    align-items: center; /* Center align logos vertically */
-    justify-content: center; /* Center align horizontally */
-    gap: 10px; /* Space between logos */
-    width: 100%; /* Ensure section takes full width */
-    overflow: hidden; /* Prevent overflow */
-    padding: 0; /* Remove extra padding */
-    box-sizing: border-box; /* Include padding and border in width calculations */
+    flex-direction: row;  /* Ensures logos are side by side */
+    justify-content: center; /* Center logos horizontally */
+    align-items: center; /* Align logos vertically */
+    margin: 0; /* Removes any default margin */
+    padding: 0; /* Removes any default padding */
+    gap: 200px; /* Starting gap for desktop screens */
 }
 
 .logo {
-    max-width: 45%; /* Adjust to fit within container */
-    height: auto;
-    display: block; /* Ensure block-level spacing */
-    margin: 0 auto; /* Center the logos */
-    transition: transform 0.3s ease;
+    margin: 0; /* Remove margin to eliminate space between logos */
+    transition: transform 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.whale-logo {
+    max-width: 300px; /* Preset width for the Baby Blue Whale logo */
+}
+
+.ocean-logo {
+    max-width: 150px; /* Adjusted width for the 4ocean logo */
+}
+
+/* Responsive adjustments to maintain side-by-side layout and adjust gap */
+@media (max-width: 1024px) {
+    .logos-section {
+        gap: 100px; /* Smaller gap for tablets and smaller desktops */
+    }
+}
+
+@media (max-width: 768px) {
+    .logos-section {
+        gap: 50px; /* Further reduced gap for smaller tablets */
+    }
+
+    .whale-logo, .ocean-logo {
+        max-width: 140px; /* Smaller logos to fit smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .logos-section {
+        gap: 20px; /* Minimal gap for mobile screens */
+    }
+
+    .whale-logo, .ocean-logo {
+        max-width: 120px; /* Adjust logo sizes for very small devices */
+    }
 }
 
 /* Optional hover effect for logos */

@@ -16,6 +16,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const ecodriveModal = document.getElementById('ecodriveModal');
     const closeEcodriveButton = ecodriveModal.querySelector('.close');
     const elementsToAnimate = document.querySelectorAll('.animate-on-load');
+    const sustainabilityMissionButton = document.getElementById('sustainabilityMissionButton');
+    const sustainabilityMissionModal = document.getElementById('sustainabilityMissionModal');
+    const closeSustainabilityMissionModal = sustainabilityMissionModal.querySelector('.close');
+
+     // Open the modal
+    sustainabilityMissionButton.addEventListener('click', function () {
+        sustainabilityMissionModal.style.display = 'block';
+    });
+
+    // Close the modal with the close button
+    closeSustainabilityMissionModal.addEventListener('click', function () {
+        sustainabilityMissionModal.style.display = 'none';
+    });
+
+    // Close the modal by clicking outside of it
+    window.addEventListener('click', function (event) {
+        if (event.target == sustainabilityMissionModal) {
+            sustainabilityMissionModal.style.display = 'none';
+        }
+    });
 
     // Video data
     const videos = [
