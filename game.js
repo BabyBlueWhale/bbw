@@ -1,58 +1,59 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreElement = document.getElementById('score');
-const timerElement = document.getElementById('timer');
-const leaderboardElement = document.getElementById('leaderboard');
-const leaderboardList = document.getElementById('leaderboardList');
+const energyElement = document.getElementById('energy-fill');
+const highScoreElement = document.getElementById('high-score');
+const messageElement = document.getElementById('message');
+const gameOverElement = document.getElementById('game-over');
+const nameInputElement = document.getElementById('name-input');
+const playerNameInput = document.getElementById('playerName');
+const endMessageElement = document.getElementById('end-message');
+const playerNameDisplay = document.getElementById('player-name');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let score = 0;
-let timeElapsed = 0;
+let energy = 100;
+let highScore = 0;
+let playerName = '';
 let player;
+let trashItems = [];
+let rareTrashItems = [];
 let obstacles = [];
 let fishItems = [];
-let trashItems = [];
-let powerUps = [];
 let gameInterval;
-let timerInterval;
 let difficultyInterval;
+let messageInterval;
 let isGameOver = false;
-let fishSpeed = 3;
-let obstacleSpeed = 2;
+let trashSpeed = 4;
+let obstacleSpeed = 5;
+let fishSpeed = 2;
+let maxEnergy = 100;
+let difficultyIntervalTime = 8000; // Initial difficulty interval (8 seconds)
+let messages = ["Is that all you got?", "Help the baby blue whale!", "Clean the ocean!"];
 
 const images = {
     background: new Image(),
-    octopus: new Image(),
-    fish: new Image(),
     trash: new Image(),
     trash2: new Image(),
     whale: new Image(),
-    speedBoost: new Image()
+    fish: new Image(),
+    obstacle: new Image()
 };
 
-images.background.src = 'blue%20ocean.jpg';
-images.octopus.src = 'octupus2.png';
-images.fish.src = 'fish.png';
+// Load images with provided paths
+images.background.src = 'blue ocean.jpg';
 images.trash.src = 'trash.png';
 images.trash2.src = 'trash2.png';
 images.whale.src = 'whale.png';
-images.speedBoost.src = 'speed_boost.png';
+images.fish.src = 'fish.png';
+images.obstacle.src = 'obstacle.png';
 
-const assetsLoaded = [];
-Object.values(images).forEach(image => {
-    image.onload = () => {
-        console.log(`Loaded: ${image.src}`);
-        assetsLoaded.push(image);
-        if (assetsLoaded.length === Object.values(images).length) {
-            console.log("All assets loaded, starting game.");
-            startGame();
-        }
-    };
-    image.onerror = () => {
-        console.error(`Failed to load image: ${image.src}`);
-    };
+// Add event listeners to check if images load correctly
+Object.values(images).forEach(img => {
+    img.onload = () => console.log(`Image loaded: ${img.src}`);
+    img.onerror = () => console.error(`Failed to load image: ${img.src}`);
 });
 
 class Player {
@@ -63,7 +64,6 @@ class Player {
         this.height = 83;
         this.speed = 10;
         this.dx = 0;
-        this.dy = 0;
     }
 
     draw() {
@@ -72,60 +72,44 @@ class Player {
 
     update() {
         this.x += this.dx;
-        this.y += this.dy;
-
         if (this.x < 0) this.x = 0;
         if (this.x + this.width > canvas.width) this.x = canvas.width - this.width;
-        if (this.y < 0) this.y = 0;
-        if (this.y + this.height > canvas.height) this.y = canvas.height - this.height;
     }
 
-    move(dir) {
-        switch (dir) {
-            case 'ArrowUp':
-            case 'touchUp':
-                this.dy = -this.speed;
-                break;
-            case 'ArrowDown':
-            case 'touchDown':
-                this.dy = this.speed;
-                break;
-            case 'ArrowLeft':
-            case 'touchLeft':
-                this.dx = -this.speed;
-                break;
-            case 'ArrowRight':
-            case 'touchRight':
-                this.dx = this.speed;
-                break;
-        }
+    move(direction) {
+        this.dx = direction === 'left' ? -this.speed : this.speed;
     }
 
     stop() {
         this.dx = 0;
-        this.dy = 0;
     }
 }
 
-class Obstacle {
-    constructor(x, y) {
+class Trash {
+    constructor(x, y, type) {
         this.x = x;
         this.y = y;
-        this.width = 100;
-        this.height = 100;
-        this.speed = obstacleSpeed;
+        this.width = 40;
+        this.height = 40;
+        this.speed = trashSpeed;
+        this.type = type;
     }
 
     draw() {
-        ctx.drawImage(images.octopus, this.x, this.y, this.width, this.height);
+        const img = this.type === 'rare' ? images.trash2 : images.trash;
+        ctx.drawImage(img, this.x, this.y, this.width, this.height);
     }
 
     update() {
         this.y += this.speed;
         if (this.y > canvas.height) {
-            this.y = -this.height;
-            this.x = Math.random() * (canvas.width - this.width);
+            this.resetPosition();
         }
+    }
+
+    resetPosition() {
+        this.y = -this.height;
+        this.x = Math.random() * (canvas.width - this.width);
     }
 }
 
@@ -145,95 +129,107 @@ class Fish {
     update() {
         this.y += this.speed;
         if (this.y > canvas.height) {
-            this.y = -this.height;
-            this.x = Math.random() * (canvas.width - this.width);
+            this.resetPosition();
         }
+    }
+
+    resetPosition() {
+        this.y = -this.height;
+        this.x = Math.random() * (canvas.width - this.width);
     }
 }
 
-class Trash {
-    constructor(x, y, type = 'trash') {
-        this.x = x;
-        this.y = y;
-        this.width = 40;
-        this.height = 40;
-        this.speed = fishSpeed;
-        this.type = type;
-    }
-
-    draw() {
-        if (this.type === 'trash') {
-            ctx.drawImage(images.trash, this.x, this.y, this.width, this.height);
-        } else {
-            ctx.drawImage(images.trash2, this.x, this.y, this.width, this.height);
-        }
-    }
-
-    update() {
-        this.y += this.speed;
-        if (this.y > canvas.height) {
-            this.y = -this.height;
-            this.x = Math.random() * (canvas.width - this.width);
-        }
-    }
-}
-
-class PowerUp {
+class Obstacle {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.width = 40;
-        this.height = 40;
-        this.speed = 2;
-        this.type = 'speedBoost';
+        this.width = 100;
+        this.height = 100;
+        this.speed = obstacleSpeed;
     }
 
     draw() {
-        ctx.drawImage(images.speedBoost, this.x, this.y, this.width, this.height);
+        ctx.drawImage(images.obstacle, this.x, this.y, this.width, this.height);
     }
 
     update() {
         this.y += this.speed;
         if (this.y > canvas.height) {
-            this.y = -this.height;
-            this.x = Math.random() * (canvas.width - this.width);
+            this.resetPosition();
         }
+    }
+
+    resetPosition() {
+        this.y = -this.height;
+        this.x = Math.random() * (canvas.width - this.width);
     }
 }
 
 function startGame() {
+    playerName = playerNameInput.value || "Player";
+    playerNameDisplay.textContent = `Player: ${playerName}`; // Display player name
+
+    // Clear and draw background image
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(images.background, 0, 0, canvas.width, canvas.height);
+
+    nameInputElement.style.display = 'none';
+    gameOverElement.style.display = 'none';
+
     isGameOver = false;
     score = 0;
-    timeElapsed = 0;
-    fishSpeed = 3;
-    obstacleSpeed = 2;
+    energy = 100;
+    trashSpeed = 4;
+    obstacleSpeed = 5;
+    fishSpeed = 2;
     scoreElement.textContent = `Score: ${score}`;
-    timerElement.textContent = `Time: ${timeElapsed}`;
-    leaderboardElement.style.display = 'none';
+    energyElement.style.width = '100%';
+    trashItems = [];
+    rareTrashItems = [];
     obstacles = [];
     fishItems = [];
-    trashItems = [];
-    powerUps = [];
     player = new Player();
-    for (let i = 0; i < 20; i++) { // 4x more fish
-        fishItems.push(new Fish(Math.random() * canvas.width, Math.random() * canvas.height - canvas.height));
+
+    createInitialElements();
+    gameInterval = setInterval(updateGame, 1000 / 60);
+    difficultyInterval = setInterval(increaseDifficulty, difficultyIntervalTime); // Set difficulty interval
+    messageInterval = setInterval(showRandomMessage, 10000);
+}
+
+function createInitialElements() {
+    for (let i = 0; i < 10; i++) {
+        trashItems.push(new Trash(Math.random() * canvas.width, Math.random() * canvas.height - canvas.height, 'common'));
     }
-    for (let i = 0; i < 7; i++) { // 30% less obstacles (7 instead of 10)
+    for (let i = 0; i < 5; i++) {
+        rareTrashItems.push(new Trash(Math.random() * canvas.width, Math.random() * canvas.height - canvas.height, 'rare'));
+    }
+    for (let i = 0; i < 7; i++) {
         obstacles.push(new Obstacle(Math.random() * canvas.width, Math.random() * canvas.height - canvas.height));
     }
-    for (let i = 0; i < 10; i++) { // Double trash
-        trashItems.push(new Trash(Math.random() * canvas.width, Math.random() * canvas.height - canvas.height, 'trash'));
-        // Adding trash2 with a 50% chance relative to trash
-        if (Math.random() < 0.33) { // Adjusted for 50% less than trash
-            trashItems.push(new Trash(Math.random() * canvas.width, Math.random() * canvas.height - canvas.height, 'trash2'));
-        }
+    for (let i = 0; i < 5; i++) {
+        fishItems.push(new Fish(Math.random() * canvas.width, Math.random() * canvas.height - canvas.height));
     }
-    powerUps.push(new PowerUp(Math.random() * canvas.width, Math.random() * canvas.height - canvas.height));
-    gameInterval = setInterval(updateGame, 1000 / 60);
-    timerInterval = setInterval(updateTimer, 1000);
-    difficultyInterval = setInterval(() => {
-        increaseDifficulty(true);
-    }, 15000);
+}
+
+function increaseDifficulty() {
+    trashSpeed += 1; // Increase trash speed
+    obstacleSpeed += 1; // Increase obstacle speed
+    fishSpeed += 0.5; // Increase fish speed
+
+    // Optionally, decrease interval time to make difficulty increases more frequent
+    if (difficultyIntervalTime > 2000) { // Minimum interval of 2 seconds
+        difficultyIntervalTime -= 1000; // Decrease difficulty interval time by 1 second
+        clearInterval(difficultyInterval); // Clear the old interval
+        difficultyInterval = setInterval(increaseDifficulty, difficultyIntervalTime); // Set new interval
+    }
+
+    console.log(`Difficulty increased: Trash Speed = ${trashSpeed}, Obstacle Speed = ${obstacleSpeed}, Fish Speed = ${fishSpeed}, Next Difficulty in = ${difficultyIntervalTime / 1000} seconds`);
+}
+
+function showRandomMessage() {
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    messageElement.textContent = messages[randomIndex];
+    setTimeout(() => messageElement.textContent = '', 3000);
 }
 
 function updateGame() {
@@ -244,163 +240,123 @@ function updateGame() {
     player.update();
     player.draw();
 
+    trashItems.forEach(trash => {
+        trash.update();
+        trash.draw();
+        if (collision(player, trash)) {
+            score += 5;
+            scoreElement.textContent = `Score: ${score}`;
+            trash.resetPosition();
+        }
+    });
+
+    rareTrashItems.forEach(trash => {
+        trash.update();
+        trash.draw();
+        if (collision(player, trash)) {
+            score += 15;
+            scoreElement.textContent = `Score: ${score}`;
+            trash.resetPosition();
+        }
+    });
+
     obstacles.forEach(obstacle => {
         obstacle.update();
         obstacle.draw();
-        if (collision(player, obstacle)) {
-            endGame();
+        if (collisionWithOverlap(player, obstacle, 0.3)) {
+            endGame("You failed to clean the ocean.");
         }
     });
 
     fishItems.forEach(fish => {
         fish.update();
         fish.draw();
-    });
-
-    trashItems.forEach(trash => {
-        trash.update();
-        trash.draw();
-        if (collision(player, trash)) {
-            if (trash.type === 'trash2') {
-                score += 5;
-            } else {
-                score++;
-            }
-            trash.y = -trash.height;
-            trash.x = Math.random() * canvas.width;
-            scoreElement.textContent = `Score: ${score}`;
-
-            if (score % 10 === 0) {
-                increaseDifficulty(false);
-            }
+        if (collision(player, fish)) {
+            energy = Math.min(maxEnergy, energy + 20);
+            energyElement.style.width = `${energy}%`;
+            fish.resetPosition();
         }
     });
 
-    powerUps.forEach(powerUp => {
-        powerUp.update();
-        powerUp.draw();
-        if (collision(player, powerUp)) {
-            activatePowerUp(powerUp.type);
-            powerUp.y = -powerUp.height;
-            powerUp.x = Math.random() * canvas.width;
-        }
-    });
-}
+    energy -= 0.1;
+    energyElement.style.width = `${Math.max(0, energy)}%`;
 
-function updateTimer() {
-    if (isGameOver) return;
-
-    timeElapsed++;
-    timerElement.textContent = `Time: ${timeElapsed}`;
-}
-
-function increaseDifficulty(fromTimer) {
-    if (isGameOver) return;
-
-    if (fromTimer || score % 10 === 0) {
-        fishSpeed += 0.5;
-        obstacleSpeed += 0.5;
-
-        obstacles.forEach(obstacle => {
-            obstacle.speed = obstacleSpeed;
-        });
-
-        fishItems.forEach(fish => {
-            fish.speed = fishSpeed;
-        });
-
-        trashItems.forEach(trash => {
-            trash.speed = fishSpeed;
-        });
+    if (energy <= 0) {
+        endGame("You failed to clean the ocean.");
     }
 }
 
 function collision(obj1, obj2) {
-    const overlapRatio = 0.25; // 75% overlap
-    const marginX = obj1.width * (1 - overlapRatio) / 2;
-    const marginY = obj1.height * (1 - overlapRatio) / 2;
-    return obj1.x + marginX < obj2.x + obj2.width &&
-           obj1.x + obj1.width - marginX > obj2.x &&
-           obj1.y + marginY < obj2.y + obj2.height &&
-           obj1.y + obj1.height - marginY > obj2.y;
+    return obj1.x < obj2.x + obj2.width &&
+           obj1.x + obj1.width > obj2.x &&
+           obj1.y < obj2.y + obj2.height &&
+           obj1.y + obj1.height > obj2.y;
 }
 
-function activatePowerUp(type) {
-    if (type === 'speedBoost') {
-        player.speed *= 2;
-        setTimeout(() => player.speed /= 2, 5000);
-    }
+function collisionWithOverlap(obj1, obj2, overlapThreshold = 0.3) {
+    const overlapX = Math.max(0, Math.min(obj1.x + obj1.width, obj2.x + obj2.width) - Math.max(obj1.x, obj2.x));
+    const overlapY = Math.max(0, Math.min(obj1.y + obj1.height, obj2.y + obj2.height) - Math.max(obj1.y, obj2.y));
+
+    const overlapArea = overlapX * overlapY;
+    const obj1Area = obj1.width * obj1.height;
+    const obj2Area = obj2.width * obj2.height;
+
+    return overlapArea >= Math.min(obj1Area, obj2Area) * overlapThreshold;
 }
 
-function endGame() {
+function endGame(message) {
     clearInterval(gameInterval);
-    clearInterval(timerInterval);
     clearInterval(difficultyInterval);
+    clearInterval(messageInterval);
     isGameOver = true;
-    saveScore(score, timeElapsed);
-    displayLeaderboard();
+    gameOverElement.style.display = 'block';
+    endMessageElement.textContent = message;
+
+    if (score > highScore) {
+        highScore = score;
+        highScoreElement.textContent = `High Score: ${highScore}`;
+        alert(`Congratulations ${playerName}, you reached a new high score!`);
+    }
 }
 
-function saveScore(score, time) {
-    let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    leaderboard.push({ score, time });
-    leaderboard.sort((a, b) => b.score - a.score || a.time - b.time);
-    leaderboard = leaderboard.slice(0, 10);
-    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+// Handle screen resize
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+// Add event listeners for touch controls
+let touchStartX = 0;
+let touchEndX = 0;
+
+canvas.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+canvas.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const swipeDistance = touchEndX - touchStartX;
+    if (swipeDistance > 50) {
+        // Swipe right
+        player.move('right');
+        setTimeout(() => player.stop(), 200); // Stop movement after a short delay
+    } else if (swipeDistance < -50) {
+        // Swipe left
+        player.move('left');
+        setTimeout(() => player.stop(), 200); // Stop movement after a short delay
+    }
 }
 
-function displayLeaderboard() {
-    let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    leaderboardList.innerHTML = '';
-    leaderboard.forEach((entry, index) => {
-        const li = document.createElement('li');
-        li.textContent = `#${index + 1}: ${entry.score} points in ${entry.time} seconds`;
-        leaderboardList.appendChild(li);
-    });
-    leaderboardElement.style.display = 'block';
-}
-
-// Event listeners for keyboard controls
+// Keyboard controls for desktop
 window.addEventListener('keydown', e => {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-        e.preventDefault();
-        player.move(e.key);
-    }
-});
-window.addEventListener('keyup', e => {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-        e.preventDefault();
-        player.stop();
-    }
+    if (e.key === 'ArrowLeft') player.move('left');
+    if (e.key === 'ArrowRight') player.move('right');
 });
 
-// Event listeners for touch controls
-canvas.addEventListener('touchstart', handleTouch);
-canvas.addEventListener('touchmove', handleTouch);
-canvas.addEventListener('touchend', handleTouchEnd);
+window.addEventListener('keyup', () => player.stop());
 
-function handleTouch(e) {
-    e.preventDefault();
-    const touch = e.touches[0];
-    const touchX = touch.clientX;
-    const touchY = touch.clientY;
-
-    if (touchY < player.y) {
-        player.move('touchUp');
-    } else if (touchY > player.y + player.height) {
-        player.move('touchDown');
-    }
-
-    if (touchX < player.x) {
-        player.move('touchLeft');
-    } else if (touchX > player.x + player.width) {
-        player.move('touchRight');
-    }
-}
-
-function handleTouchEnd(e) {
-    e.preventDefault();
-    player.stop();
-}
-
-startGame();
+nameInputElement.style.display = 'block';

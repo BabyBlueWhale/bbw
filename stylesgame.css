@@ -1,0 +1,129 @@
+/* Define CSS variables for colors and fonts */
+:root {
+    --primary-color: #007c91;
+    --secondary-color: #004d40;
+    --accent-color: #ff6f61;
+    --background-color: #f5f5f5;
+    --font-main: 'Poppins', sans-serif;
+    --font-alt: 'Roboto Mono', monospace;
+    --energy-color: #4caf50; /* Energy bar color */
+}
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: var(--font-main);
+    background: url('blue ocean.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+
+/* Style for score, energy, high score, and player name */
+#score, #energy, #high-score, #player-name {
+    position: absolute;
+    top: 10px;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+#score {
+    left: 10px;
+}
+
+#player-name {
+    left: 10px;
+    top: 40px; /* Positioned below the score */
+}
+
+#energy {
+    left: 130px; /* Positioning to the right of the score */
+}
+
+#high-score {
+    right: 10px;
+}
+
+/* Style for messages */
+#message {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    font-family: var(--font-alt);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: none;
+}
+
+/* Style for the game-over screen */
+#game-over, #name-input {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+#game-over h2, #name-input h2 {
+    font-family: var(--font-alt);
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--accent-color);
+}
+
+/* Style for the game canvas */
+canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Energy bar style */
+#energy-bar {
+    position: absolute;
+    top: 100px; /* Lowered the position of the energy bar */
+    left: 10px;
+    width: 150px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+#energy-fill {
+    height: 100%;
+    background-color: var(--energy-color);
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
