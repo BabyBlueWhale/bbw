@@ -36,6 +36,8 @@ let fishSpeed = 2;
 let maxEnergy = 100;
 let difficultyIntervalTime = 8000; // Initial difficulty interval (8 seconds)
 let messages = ["Is that all you got?", "Help the baby blue whale!", "Clean the ocean!"];
+let startTime, elapsedTime = 0; // Initialize timer variables
+let gameSpeedIncreaseInterval = 20000; // 20 seconds for speed increase
 
 const images = {
     background: new Image(),
@@ -189,6 +191,10 @@ function startGame() {
     playerName = playerNameInput.value || "Player";
     playerNameDisplay.textContent = `Player: ${playerName}`; // Display player name
 
+    // Initialize the start time
+    startTime = new Date().getTime();
+    elapsedTime = 0;
+
     // Clear and draw background image
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(images.background, 0, 0, canvas.width, canvas.height);
@@ -214,6 +220,9 @@ function startGame() {
     gameInterval = setInterval(updateGame, 1000 / 60);
     difficultyInterval = setInterval(increaseDifficulty, difficultyIntervalTime);
     messageInterval = setInterval(showRandomMessage, 10000);
+
+    // Set interval to increase speed every 20 seconds
+    setInterval(increaseGameSpeed, gameSpeedIncreaseInterval);
 }
 
 function createInitialElements() {
@@ -245,6 +254,13 @@ function increaseDifficulty() {
     console.log(`Difficulty increased: Trash Speed = ${trashSpeed}, Obstacle Speed = ${obstacleSpeed}, Fish Speed = ${fishSpeed}, Next Difficulty in = ${difficultyIntervalTime / 1000} seconds`);
 }
 
+function increaseGameSpeed() {
+    trashSpeed += 0.5;
+    obstacleSpeed += 0.5;
+    fishSpeed += 0.2;
+    console.log(`Game speed increased: Trash Speed = ${trashSpeed}, Obstacle Speed = ${obstacleSpeed}, Fish Speed = ${fishSpeed}`);
+}
+
 function showRandomMessage() {
     const randomIndex = Math.floor(Math.random() * messages.length);
     messageElement.textContent = messages[randomIndex];
@@ -253,6 +269,10 @@ function showRandomMessage() {
 
 function updateGame() {
     if (isGameOver) return;
+
+    const currentTime = new Date().getTime();
+    elapsedTime = Math.floor((currentTime - startTime) / 1000); // Calculate elapsed time in seconds
+    scoreElement.textContent = `Score: ${score} | Time: ${elapsedTime} sec`;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(images.background, 0, 0, canvas.width, canvas.height);
@@ -264,7 +284,7 @@ function updateGame() {
         trash.draw();
         if (collision(player, trash)) {
             score += 5;
-            scoreElement.textContent = `Score: ${score}`;
+            scoreElement.textContent = `Score: ${score} | Time: ${elapsedTime} sec`;
             trash.resetPosition();
         }
     });
@@ -274,7 +294,7 @@ function updateGame() {
         trash.draw();
         if (collision(player, trash)) {
             score += 15;
-            scoreElement.textContent = `Score: ${score}`;
+            scoreElement.textContent = `Score: ${score} | Time: ${elapsedTime} sec`;
             trash.resetPosition();
         }
     });
@@ -331,8 +351,8 @@ function endGame(message) {
     gameOverElement.style.display = 'block';
     endMessageElement.textContent = message;
 
-    if (score > highScore) {
-        highScore = score;
+    if (score + elapsedTime > highScore) {
+        highScore = score + elapsedTime; // Combine score with time for high score
         highScoreElement.textContent = `High Score: ${highScore}`;
         alert(`Congratulations ${playerName}, you reached a new high score!`);
     }
