@@ -8,36 +8,115 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextButton = document.getElementById("next-video");
     const openStoreButton = document.getElementById('openStoreButton');
     const storeModal = document.getElementById('storeModal');
-    const closeModalButton = document.querySelector('.modal .close');
-    const backToTopButton = document.getElementById("back-to-top");
-    const readMoreLinks = document.querySelectorAll('.read-more-link');
-    const closeButtons = document.querySelectorAll('.close');
     const openEcodriveButton = document.getElementById('openEcodriveButton');
     const ecodriveModal = document.getElementById('ecodriveModal');
-    const closeEcodriveButton = ecodriveModal.querySelector('.close');
-    const elementsToAnimate = document.querySelectorAll('.animate-on-load');
     const sustainabilityMissionButton = document.getElementById('sustainabilityMissionButton');
     const sustainabilityMissionModal = document.getElementById('sustainabilityMissionModal');
-    const closeSustainabilityMissionModal = sustainabilityMissionModal.querySelector('.close');
+    const leftButtons = document.querySelectorAll('.left-button');
+    const readMoreLinks = document.querySelectorAll('.read-more-link');
+    const closeButtons = document.querySelectorAll('.close');
+    const elementsToAnimate = document.querySelectorAll('.animate-on-load');
+    const backToTopButton = document.getElementById("back-to-top");
 
-     // Open the modal
-    sustainabilityMissionButton.addEventListener('click', function () {
-        sustainabilityMissionModal.style.display = 'block';
+    // Function to Open Modals
+    function openModal(modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    // Function to Close Modals
+    function closeModal(modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+
+    // Specific functions to open and close Ecodrive and Store modals
+    function openEcodriveModal() {
+        openModal(ecodriveModal);
+    }
+
+    function closeEcodriveModal() {
+        closeModal(ecodriveModal);
+    }
+
+    function openStoreModal() {
+        openModal(storeModal);
+    }
+
+    function closeStoreModal() {
+        closeModal(storeModal);
+    }
+
+    // Event Listeners for Opening Modals
+    if (sustainabilityMissionButton) {
+        sustainabilityMissionButton.addEventListener('click', function () {
+            openModal(sustainabilityMissionModal);
+        });
+    }
+    if (openEcodriveButton) {
+        openEcodriveButton.addEventListener('click', openEcodriveModal);
+    }
+    if (openStoreButton) {
+        openStoreButton.addEventListener('click', openStoreModal);
+    }
+
+    // Event Listeners for Closing Ecodrive Modal
+    const closeEcodriveButtons = document.querySelectorAll('.close-ecodrive-modal');
+    closeEcodriveButtons.forEach(button => {
+        button.addEventListener('click', closeEcodriveModal);
     });
 
-    // Close the modal with the close button
-    closeSustainabilityMissionModal.addEventListener('click', function () {
-        sustainabilityMissionModal.style.display = 'none';
+    // Event Listeners for Closing Store Modal
+    const closeStoreButtons = document.querySelectorAll('.close-store-modal');
+    closeStoreButtons.forEach(button => {
+        button.addEventListener('click', closeStoreModal);
     });
 
-    // Close the modal by clicking outside of it
+    // Event Listeners for Closing Other Modals
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const modal = button.closest('.modal');
+            if (modal) closeModal(modal);
+        });
+    });
+
+    // Close Modals When Clicking Outside
     window.addEventListener('click', function (event) {
-        if (event.target == sustainabilityMissionModal) {
-            sustainabilityMissionModal.style.display = 'none';
+        if (event.target.classList.contains('modal')) {
+            closeModal(event.target);
         }
     });
 
-    // Video data
+    // Close All Modals on Left Button Click
+    leftButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const modal = button.closest('.modal');
+            if (modal) closeModal(modal);
+        });
+    });
+
+    // Hamburger Menu Toggle
+    if (hamburgerMenu && mobileNav) {
+        hamburgerMenu.addEventListener('click', function (event) {
+            event.stopPropagation();
+            mobileNav.classList.toggle('open');
+            hamburgerMenu.classList.toggle('open');
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!mobileNav.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+                mobileNav.classList.remove('open');
+                hamburgerMenu.classList.remove('open');
+            }
+        });
+
+        mobileNav.addEventListener('click', function () {
+            mobileNav.classList.remove('open');
+            hamburgerMenu.classList.remove('open');
+        });
+    }
+
+    // Video Controls
     const videos = [
         "videos/chapter-1.mp4", "videos/Chapter-2.mp4", "videos/Chapter-3.mp4",
         "videos/chapter-4.mp4", "videos/Chapter-5.mp4", "videos/chapter6.mp4",
@@ -45,17 +124,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "videos/Chapter-10.mp4"
     ];
     let currentVideoIndex = 0;
-
-    // Functions
-    function toggleMenu() {
-        mobileNav.classList.toggle('open');
-        hamburgerMenu.classList.toggle('open');
-    }
-
-    function closeMenu() {
-        mobileNav.classList.remove('open');
-        hamburgerMenu.classList.remove('open');
-    }
 
     function updateVideo() {
         currentVideoElement.style.transform = 'translateX(-100%)';
@@ -65,82 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
             currentVideoElement.play();
             currentVideoElement.style.transform = 'translateX(0)';
         }, 500);
-    }
-
-    function openModal(modalId) {
-        document.getElementById(modalId).style.display = 'block';
-    }
-
-    function closeModal(modalId) {
-        document.getElementById(modalId).style.display = 'none';
-        resetReadMoreLinks();
-    }
-
-    function resetReadMoreLinks() {
-        readMoreLinks.forEach(link => {
-            link.textContent = 'Read More';
-        });
-    }
-
-    function openEcodriveModal() {
-        ecodriveModal.style.display = 'block';
-    }
-
-    function closeEcodriveModal() {
-        ecodriveModal.style.display = 'none';
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    elementsToAnimate.forEach((element, index) => {
-        setTimeout(() => {
-            if (index % 2 === 0) {
-                element.classList.add('slide-left');
-            } else {
-                element.classList.add('slide-right');
-            }
-        }, index * 200); // Delay each animation by 200ms
-    });
-
-
-    // Event Listeners
-    if (openEcodriveButton && ecodriveModal) {
-        openEcodriveButton.addEventListener('click', function () {
-            openEcodriveModal();
-        });
-
-        closeEcodriveButton.addEventListener('click', function () {
-            closeEcodriveModal();
-        });
-
-        window.addEventListener('click', function (event) {
-            if (event.target === ecodriveModal) {
-                closeEcodriveModal();
-            }
-        });
-    }
-
-    // Event Listeners
-    if (hamburgerMenu && mobileNav) {
-        hamburgerMenu.addEventListener('click', function (event) {
-            event.stopPropagation();
-            toggleMenu();
-        });
-
-        document.addEventListener('click', function (event) {
-            if (!mobileNav.contains(event.target) && !hamburgerMenu.contains(event.target)) {
-                closeMenu();
-            }
-        });
-
-        mobileNav.addEventListener('click', closeMenu);
     }
 
     if (prevButton && nextButton && currentVideoElement) {
@@ -159,13 +151,34 @@ document.addEventListener("DOMContentLoaded", function () {
             updateVideo();
         });
 
-        // Ensure the video is muted by default
         currentVideoElement.muted = true;
         currentVideoElement.autoplay = true;
         currentVideoElement.playsinline = true;
         currentVideoElement.loop = false;
     }
 
+    // Smooth Scroll for Anchors
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Animate Elements on Load
+    elementsToAnimate.forEach((element, index) => {
+        setTimeout(() => {
+            if (index % 2 === 0) {
+                element.classList.add('slide-left');
+            } else {
+                element.classList.add('slide-right');
+            }
+        }, index * 200);
+    });
+
+    // Contact Form Handling
     if (contactForm) {
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -179,10 +192,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Read More Links Toggle
     readMoreLinks.forEach(link => {
         link.addEventListener('click', function (event) {
             event.preventDefault();
-            const targetId = this.getAttribute('data-target').substring(1); // Remove the '#' from the id
+            const targetId = this.getAttribute('data-target').substring(1);
             const target = document.getElementById(targetId);
             if (target) {
                 target.style.display = target.style.display === 'block' ? 'none' : 'block';
@@ -191,43 +205,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    closeButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const modalId = this.parentElement.parentElement.id;
-            closeModal(modalId);
-        });
-    });
-
-    window.addEventListener('click', function (event) {
-        const modals = document.querySelectorAll('.modal');
-        modals.forEach(modal => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                resetReadMoreLinks();
-            }
-        });
-    });
-
+    // Back to Top Button
     if (backToTopButton) {
         backToTopButton.addEventListener('click', function () {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
-
-    if (openStoreButton && storeModal && closeModalButton) {
-        openStoreButton.addEventListener('click', function () {
-            storeModal.style.display = 'block';
-        });
-
-        closeModalButton.addEventListener('click', function () {
-            storeModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', function (event) {
-            if (event.target === storeModal) {
-                storeModal.style.display = 'none';
-            }
-        });
-    }
-
 });

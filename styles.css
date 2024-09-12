@@ -651,27 +651,91 @@ footer {
     animation: fadeIn 2s ease-in-out, pulse 1.5s infinite alternate;
 }
 
-/* Modal Styling */
+/* Base Modal Styles */
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1001; 
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1001; /* Ensure it's on top of other elements */
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; 
-    background-color: rgba(0, 0, 0, 0.4); 
+    overflow: hidden; /* Prevent content overflow */
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background for focus */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
 }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; 
+/* Regular Modals */
+.modal:not(.full-screen-modal) .modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
     border-radius: 10px;
+    background-color: #222; /* Dark background */
+    color: #fff; /* White text */
+    overflow: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); /* Center vertically */
+}
+
+/* Full-Screen Modals */
+.full-screen-modal .modal-content {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent; /* No background color */
+    color: inherit; /* Inherit text color */
+    overflow: hidden; /* Prevent scrollbars */
+    position: relative;
+}
+
+/* Close Button Style */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Left-Side Button Styling */
+.left-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #333; /* Dark background color */
+    color: #ffffff; /* White text color */
+    padding: 10px 20px; /* Padding */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Cursor style */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Makes the text bold */
+    z-index: 1002; /* Ensure button is above other content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    text-align: center; /* Center the text horizontally */
+    display: inline-block; /* Dynamic width based on content */
+    white-space: nowrap; /* Prevent text wrapping */
+    line-height: 1.2; /* Adjust line height for centering */
+    vertical-align: middle; /* Align text vertically in the middle */
+    min-width: 80px; /* Ensures the button has a minimum width */
+}
+
+/* Hover effect for the Close button */
+.left-button:hover {
+    background-color: #222; /* Slightly darker background on hover */
+    transform: scale(1.05); /* Slight enlarge effect on hover */
 }
 
 .close {
