@@ -1036,3 +1036,51 @@ h1, h2, h3, h4, h5, h6 {
 .game-image-spacing {
     margin-top: 20px; /* Adds space above the image */
 }
+
+/* Video Background */
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Video Background */
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    background-color: #003e4f; /* Add a fallback color to match the theme */
+}
+
+/* Fallback Image */
+#fallback-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #003e4f; /* Same color as the video background */
+}
+
+/* Show fallback image if video is not supported */
+@media not all and (min-resolution: 0.001dpcm) {
+    #video-background {
+        display: none;
+    }
+
+    #fallback-background {
+        display: block;
+    }
+}
