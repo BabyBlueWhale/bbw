@@ -7,7 +7,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: url('images/ocean.webp') no-repeat center center fixed;
+    background: url('images/ocean.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #004d40;
     overflow-x: hidden;
@@ -1059,7 +1059,7 @@ h1, h2, h3, h4, h5, h6 {
     object-fit: cover;
     z-index: -1;
     pointer-events: none;
-    background-color: #003e4f; /* Add a fallback color to match the theme */
+    background-color: #78cfe7;
 }
 
 /* Fallback Image */
@@ -1071,7 +1071,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-color: #003e4f; /* Same color as the video background */
+    background-color: #78cfe7;
 }
 
 /* Show fallback image if video is not supported */
